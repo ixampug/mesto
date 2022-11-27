@@ -1,0 +1,12 @@
+.profile__edit {
+    background-image: url(../../../images/pencil.svg);
+    background-color: transparent;
+    background-size: 10px 10px;
+    border: 1px solid #fff;
+    min-width: 24px;
+    height: 24px;
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    
+}
