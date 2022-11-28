@@ -4,5 +4,13 @@
     padding-right: 18px;
     font-weight: 500;
     margin: 0;
+}
 
+@media screen and (max-width: 768px) {
+    .profile__name {
+        font-size: 27px;
+        text-align: center;
+        margin: 0 7px 0 0;
+        padding-right: 0;
+    }
 }

@@ -8,5 +8,17 @@
     box-sizing: border-box;
     background-repeat: no-repeat;
     background-position: 50%;
-    
+   
+}
+
+.profile__edit:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__edit {
+        height: 18px;
+        min-width: 18px;
+    }
 }

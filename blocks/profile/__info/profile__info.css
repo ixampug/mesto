@@ -4,5 +4,11 @@
     flex-direction: column;
     max-width: 336px;
     padding-left: 30px;
+}
 
+@media screen and (max-width: 768px) {
+    .profile__info {
+        padding: 24px 0 0;
+        max-width: 280px;
+    }
 }

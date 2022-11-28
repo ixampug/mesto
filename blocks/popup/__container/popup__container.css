@@ -9,3 +9,11 @@
     border-radius: 10px;
     
 }
+
+@media screen and (max-width: 768px) {
+    .popup__container {
+        height: 322px;
+        width: 282px;
+        padding: 30px 16px;
+    }
+}

@@ -9,3 +9,15 @@
     background-size: 22px 22px;
 
 }
+
+.profile__add:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 768px) {
+    .profile__add {
+        
+        width: 100%;
+    }
+}

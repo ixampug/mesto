@@ -4,10 +4,19 @@ const popupOpenButtonElement = document.querySelector('.profile__edit');
 const profileName = document.querySelector('.profile__name');
 const profileOccupation = document.querySelector('.profile__occupation');
 
+
+
+
+const formElement = document.querySelector('.popup__form');  
+
+const nameInput = formElement.querySelector('.popup__input_text_name');  
+const jobInput = formElement.querySelector('.popup__input_text_occupation'); 
+
+
 const openPopup = function () {
    popupElement.classList.toggle('popup_opened');
-    profileName.value = nameInput.textContent;
-    profileOccupation.value = jobInput.textContent;
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileOccupation.textContent;
 }
 
 const closePopup = function() {
@@ -30,26 +39,13 @@ popupElement.addEventListener('click', closePopupByClickOnOverlay);
 
 
 
-// Находим форму в DOM
-let formElement = document.querySelector('.popup__form');  // Воспользуйтесь методом querySelector()
-// Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__input_text_name');  // Воспользуйтесь инструментом .querySelector()
-let jobInput = formElement.querySelector('.popup__input_text_occupation'); // Воспользуйтесь инструментом .querySelector()
-
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
-
-    jobInput.textContent = profileOccupation.value; // Получите значение полей jobInput и nameInput из свойства value
-    nameInput.textContent = profileName.value;
-    // Выберите элементы, куда должны быть вставлены значения полей
-    closePopup;
-    // Вставьте новые значения с помощью textContent
+    evt.preventDefault(); 
+    profileName.textContent = nameInput.value; 
+    profileOccupation.textContent = jobInput.value;
+    closePopup ();
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);

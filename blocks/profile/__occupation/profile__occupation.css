@@ -4,3 +4,10 @@
     line-height: 22px;
     margin: 16px 0 0 0;
 }
+
+@media screen and (max-width: 768px) {
+    .profile__occupation {
+        font-size: 14px;
+        text-align: center;
+    }
+}
