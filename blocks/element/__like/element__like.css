@@ -6,5 +6,10 @@
     width: 22px;
     border: none;
     align-self: center;
-    
+    outline: none;
+}
+
+.element__like:hover {
+    opacity: 0.5;
+    transition: 0.5s;
 }
