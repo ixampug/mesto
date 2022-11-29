@@ -32,11 +32,6 @@ const closePopupByClickOnOverlay = function(event) {
 }
 
 
-
-
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
 function formSubmitHandler (evt) {
     evt.preventDefault(); 
     profileName.textContent = nameInput.value; 

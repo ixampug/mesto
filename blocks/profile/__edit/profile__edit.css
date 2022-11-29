@@ -8,7 +8,7 @@
     box-sizing: border-box;
     background-repeat: no-repeat;
     background-position: 50%;
-   
+    outline: none;
 }
 
 .profile__edit:hover {
@@ -20,5 +20,6 @@
     .profile__edit {
         height: 18px;
         min-width: 18px;
+        margin-left: 10px;
     }
 }
