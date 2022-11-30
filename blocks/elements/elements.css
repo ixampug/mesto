@@ -16,20 +16,12 @@
     }
 }
 
-@media screen and (max-width: 768px) {
-    .elements {
-        gap: 16px;
-        padding-right: 24px;
-        padding-left: 24px;
-        padding-top: 88px;
-    }
-}
 
 @media screen and (max-width: 320px) {
     .elements{
         gap: 20px;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 64px;
+        padding-left: 19px;
+        padding-right: 19px;
+        padding-top: 0;
     }
 }
