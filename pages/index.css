@@ -50,7 +50,7 @@
 @import url(../blocks/popup/__fullscreen/popup__fullscreen.css);
 @import url(../blocks/popup/__fullview/popup__fullview.css);
 @import url(../blocks/popup/__subtitle/popup__subtitle.css);
-
+@import url(../blocks/popup/_fullview/popup_fullview.css);
 
 
 

@@ -1,31 +1,4 @@
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
-  const popupEdit = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup_edit');
   const popupAdd = document.querySelector('.popup_add');
   const popupFullView = document.querySelector('.popup_fullview');
   const popupPicture = popupFullView.querySelector('.popup__picture');
@@ -81,6 +54,18 @@ const initialCards = [
     return card;
   };
   
+//   ('click', () => openPopupImage(data))
+//   function openPopupImage(item) {...}
+
+
+
+
+
+
+
+
+
+
   initialCards.forEach(function(item) {
     const element = createElement(item);
     elementsListElement.append(element);
@@ -106,7 +91,7 @@ const initialCards = [
   };
   
 
-  
+
   const closePopupEdit = function() {
     closePopup(popupEdit);
   };
@@ -129,7 +114,7 @@ const initialCards = [
 
 
   
-  function formEditSubmitHandler (evt) {
+  function submitEditHandlerForm (evt) {
     evt.preventDefault()
     profileName.textContent = nameInput.value;
     profileOccupation.textContent = jobInput.value;
@@ -141,7 +126,7 @@ const initialCards = [
 
 
   
-  function formAddSubmitHandler (evt) {
+  function submitAddHandlerForm (evt) {
     evt.preventDefault()
     const newCard = {
 
@@ -161,7 +146,7 @@ const initialCards = [
   popupCloseAdd.addEventListener('click', closePopupAdd);
   popupCloseFullView.addEventListener('click', closePopupViewImage);
   
-  formEdit.addEventListener('submit', formEditSubmitHandler);
-  formAdd.addEventListener('submit', formAddSubmitHandler);
+  formEdit.addEventListener('submit', submitEditHandlerForm);
+  formAdd.addEventListener('submit', submitAddHandlerForm);
 
  
