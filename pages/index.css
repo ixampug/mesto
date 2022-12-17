@@ -51,6 +51,10 @@
 @import url(../blocks/popup/__fullview/popup__fullview.css);
 @import url(../blocks/popup/__subtitle/popup__subtitle.css);
 @import url(../blocks/popup/_fullview/popup_fullview.css);
+@import url(../blocks/popup/__submit/_disabled/popup__submit_disabled.css);
+@import url(../blocks/popup/__error/popup__error.css);
+@import url(../blocks/popup/__error/_active/popup__error_active.css);
+@import url(../blocks/popup/__input/_error/popup__input_error.css);
 
 
 

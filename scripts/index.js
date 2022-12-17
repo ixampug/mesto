@@ -16,8 +16,8 @@ const popupEdit = document.querySelector('.popup_edit');
   const popupCloseFullView = popupFullView.querySelector('.popup__close_fullview');
   const cardTemplate = document.querySelector("#card-template").content.querySelector('.element');
   const elementsListElement = document.querySelector('.elements');
-  const inputCardName = formAdd.querySelector('#input_card_name');
-  const inputCardUrl = formAdd.querySelector('#input_card_url');
+  const inputCardName = formAdd.querySelector('#card');
+  const inputCardUrl = formAdd.querySelector('#url');
 
   
   
@@ -79,25 +79,34 @@ const popupEdit = document.querySelector('.popup_edit');
     item.classList.add('popup_opened');
     item.addEventListener('click', closePopupByClickOnOverlay);
     document.addEventListener('keyup', closePopupByKey);
-  };
-  
-  const openPopupEdit = function() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileOccupation.textContent;
-    openPopup(popupEdit);
+    // resetInputErrors(item, config);
   };
   
   const openPopupAdd = function() {
     openPopup(popupAdd);
   };
+
+  const openPopupEdit = function() {
+    const submitButton = formEdit.querySelector('.popup__submit');
+    submitButton.classList.remove('popup__submit_disabled');
+    submitButton.disabled = false;
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileOccupation.textContent;
+    openPopup(popupEdit);
+  };
+  
+ 
   
   const closePopup = function(item) {
     item.classList.remove('popup_opened');
+    item.removeEventListener('click', closePopupByClickOnOverlay);
     document.removeEventListener('keyup', closePopupByKey);
-    item.removeEventListener('click', closePopupByClickOnOverlay)
+    
   };
   
-
+  const closePopupFullView = function() {
+    closePopup(popupFullView);
+  };
 
   const closePopupEdit = function() {
     closePopup(popupEdit);
@@ -107,9 +116,7 @@ const popupEdit = document.querySelector('.popup_edit');
     closePopup(popupAdd);
   };
   
-  const closePopupViewImage = function() {
-    closePopup(popupFullView);
-  };
+ 
 
   const closePopupByKey = (e) => {
     if (e.key === 'Escape') {
@@ -135,7 +142,7 @@ const closePopupByClickOnOverlay = function(event) {
   popupCloseEdit.addEventListener('click', closePopupEdit);
 
   popupCloseAdd.addEventListener('click', closePopupAdd);
-  popupCloseFullView.addEventListener('click', closePopupViewImage);
+  popupCloseFullView.addEventListener('click', closePopupFullView);
   
   formEdit.addEventListener('submit', submitEditHandlerForm);
   formAdd.addEventListener('submit', submitAddHandlerForm);
