@@ -1,16 +1,6 @@
-// включение валидации вызовом enableValidation
-// все настройки передаются при вызове
 
-const config = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit',
-    inactiveButtonClass: 'popup__submit_disabled',
-    inputErrorClass: 'popup__input_error',
-    errorClass: 'popup__error_active'
-  };
 
-  const toggleButtonState = (inputs, button, config) => {
+  const toggleButton = (inputs, button, config) => {
     const isFormValid = inputs.every((input) => input.validity.valid);
    
          if (isFormValid) {
@@ -25,7 +15,8 @@ const config = {
 
   const enableValidation = (config) => {
     const {formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, ...restConfig} = config;
-    const forms = [...document.querySelectorAll(config.formSelector)];
+    
+    const forms = [...document.querySelectorAll(formSelector)];
   
     forms.forEach((form) => {
     const inputs = [...form.querySelectorAll(inputSelector)];
@@ -39,7 +30,7 @@ const config = {
         inputs.forEach((input) => {
           input.addEventListener("input", () => {
             checkInputValidity(input, restConfig);
-            toggleButtonState(inputs, button, config);
+            toggleButton(inputs, button, restConfig);
   
         });
     });
@@ -85,14 +76,16 @@ const config = {
  
   
 
-//   const resetInputErrors = (form, config) => {
-//     const inputs = [...form.querySelectorAll(config.inputSelector)];
-    
-//     inputs.forEach((input) => {
-//       const error = document.querySelector(`#${input.id}-error`);
-//       hideInputError(error, input, config);
-//     });
-//   }
-  
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit',
+    inactiveButtonClass: 'popup__submit_disabled',
+    inputErrorClass: 'popup__input_error',
+    errorClass: 'popup__error_active'
+  };
 
   enableValidation(config);

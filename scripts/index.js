@@ -126,11 +126,11 @@ const popupEdit = document.querySelector('.popup_edit');
   }
   
 
-const closePopupByClickOnOverlay = function(event) {
-    if (event.target !== event.currentTarget) {
+const closePopupByClickOnOverlay = function(e) {
+    if (e.target !== e.currentTarget) {
         return;
     } 
-    closePopup(event.currentTarget);
+    closePopup(e.currentTarget);
 };
 
 
