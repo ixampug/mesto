@@ -4,7 +4,7 @@ const popupEdit = document.querySelector('.popup_edit');
   const popupAddOpenButton = document.querySelector('.profile__add');
   const profileName = document.querySelector('.profile__name');
   const profileOccupation = document.querySelector('.profile__occupation');
-  const formEdit = document.querySelector('.popup__form');
+  const formEdit = document.querySelector('#formEdit');
   const formAdd = document.querySelector('.popup__form_add');
   const popupFullView = document.querySelector('.popup_fullview');
   const popupPicture = popupFullView.querySelector('.popup__picture');
@@ -18,7 +18,7 @@ const popupEdit = document.querySelector('.popup_edit');
   const elementsListElement = document.querySelector('.elements');
   const inputCardName = formAdd.querySelector('#card');
   const inputCardUrl = formAdd.querySelector('#url');
-
+  const submitButton = formEdit.querySelector('.popup__submit');
   
   
   
@@ -73,6 +73,7 @@ const popupEdit = document.querySelector('.popup_edit');
     elementsListElement.prepend(element);
     closePopupAdd();
     formAdd.reset();
+    submitButton.disabled = true;
   };
   
   const openPopup = function(item) {
@@ -104,6 +105,12 @@ const popupEdit = document.querySelector('.popup_edit');
     
   };
   
+  const buttonCloseList = document.querySelectorAll('.popup__close');
+  buttonCloseList.forEach(btn => {
+    const popup = btn.closest('.popup');
+    btn.addEventListener('click', () => closePopup(popup)); 
+  });
+
   const closePopupFullView = function() {
     closePopup(popupFullView);
   };

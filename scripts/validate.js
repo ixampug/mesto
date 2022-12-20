@@ -22,10 +22,10 @@
     const inputs = [...form.querySelectorAll(inputSelector)];
     const button = form.querySelector(submitButtonSelector);
   
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        disableButton(button, config);
-      });
+    //   form.addEventListener("submit", (e) => {
+    //     e.preventDefault();
+    //     disableButton(button, config);
+    //   });
   
         inputs.forEach((input) => {
           input.addEventListener("input", () => {
