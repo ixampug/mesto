@@ -14,7 +14,7 @@
    
 
   const enableValidation = (config) => {
-    const {formSelector, inputSelector, submitButtonSelector, inactiveButtonClass, ...restConfig} = config;
+    const {formSelector, inputSelector, submitButtonSelector, ...restConfig} = config;
     
     const forms = [...document.querySelectorAll(formSelector)];
   
@@ -26,7 +26,7 @@
     //     e.preventDefault();
     //     disableButton(button, config);
     //   });
-  
+        toggleButton(inputs, button, restConfig);
         inputs.forEach((input) => {
           input.addEventListener("input", () => {
             checkInputValidity(input, restConfig);

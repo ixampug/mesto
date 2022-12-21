@@ -73,7 +73,8 @@ const popupEdit = document.querySelector('.popup_edit');
     elementsListElement.prepend(element);
     closePopupAdd();
     formAdd.reset();
-    submitButton.disabled = true;
+    // submitButton.disabled = true;
+    evt.submitter.disabled = true;
   };
   
   const openPopup = function(item) {
