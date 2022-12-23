@@ -71,10 +71,12 @@ const popupEdit = document.querySelector('.popup_edit');
     }
     const element = createElement(newCard);
     elementsListElement.prepend(element);
+    evt.submitter.disabled = true;
+    evt.submitter.classList.add('popup__submit_disabled');
     closePopupAdd();
     formAdd.reset();
     // submitButton.disabled = true;
-    evt.submitter.disabled = true;
+    
   };
   
   const openPopup = function(item) {
