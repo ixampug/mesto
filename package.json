@@ -1,0 +1,15 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "learning platform",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "\"\"\u001b[DMax Vasilev\"",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1"
+  }
+}

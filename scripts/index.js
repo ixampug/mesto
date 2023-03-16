@@ -1,27 +1,37 @@
-const popupEdit = document.querySelector('.popup_edit');
+  import {initialCards, config} from './data.js';
+  import { Card } from './Card.js'
+  import { FormValidator } from './FormValidator.js';
+  
+  const popupEdit = document.querySelector('.popup_edit');
   const popupAdd = document.querySelector('.popup_add');
+
   const popupEditOpenButton = document.querySelector('.profile__edit');
   const popupAddOpenButton = document.querySelector('.profile__add');
+
   const profileName = document.querySelector('.profile__name');
   const profileOccupation = document.querySelector('.profile__occupation');
+  
   const formEdit = document.querySelector('#formEdit');
   const formAdd = document.querySelector('.popup__form_add');
+
   const popupFullView = document.querySelector('.popup_fullview');
   const popupPicture = popupFullView.querySelector('.popup__picture');
   const popupSubtitle = popupFullView.querySelector('.popup__subtitle');
+
   const nameInput = formEdit.querySelector('.popup__input_text_name'); 
   const jobInput = formEdit.querySelector('.popup__input_text_occupation');
+  
   const popupCloseEdit = popupEdit.querySelector('.popup__close_edit');
   const popupCloseAdd = popupAdd.querySelector('.popup__close_add');
   const popupCloseFullView = popupFullView.querySelector('.popup__close_fullview');
+  
   const cardTemplate = document.querySelector("#card-template").content.querySelector('.element');
   const elementsListElement = document.querySelector('.elements');
   const inputCardName = formAdd.querySelector('#card');
   const inputCardUrl = formAdd.querySelector('#url');
   const submitButton = formEdit.querySelector('.popup__submit');
   
-  
-  
+
   function createElement(item) {
     
     const card = cardTemplate.cloneNode(true); 
@@ -50,13 +60,22 @@ const popupEdit = document.querySelector('.popup_edit');
     return card;
   };
   
-  initialCards.forEach(function(item) {
-    const element = createElement(item);
-    elementsListElement.append(element);
+  const validationEditForm = new FormValidator(config, formEdit);
+validationEditForm.enableValidation();
+
+const validationAddForm = new FormValidator(config, formAdd);
+validationAddForm.enableValidation();
+  
+  initialCards.forEach((cardData) => {
+    const card = new Card(cardData, '#card-template');
+    const cardElement = card.generateCard();
+    elementsListElement.append(cardElement);
   });
   
-  function submitEditHandlerForm (evt) {
-    evt.preventDefault()
+
+ 
+  const submitEditHandlerForm = (evt) => {
+    evt.preventDefault();
     profileName.textContent = nameInput.value;
     profileOccupation.textContent = jobInput.value;
     closePopupEdit();
@@ -65,10 +84,10 @@ const popupEdit = document.querySelector('.popup_edit');
   function submitAddHandlerForm (evt) {
     evt.preventDefault()
     const newCard = {
-
       name: inputCardName.value,
       link: inputCardUrl.value
     }
+
     const element = createElement(newCard);
     elementsListElement.prepend(element);
     evt.submitter.disabled = true;
@@ -133,7 +152,7 @@ const popupEdit = document.querySelector('.popup_edit');
         const openedPopup = document.querySelector('.popup_opened');
         closePopup(openedPopup);
     };
-  }
+  };
   
 
 const closePopupByClickOnOverlay = function(e) {
@@ -157,4 +176,4 @@ const closePopupByClickOnOverlay = function(e) {
   formEdit.addEventListener('submit', submitEditHandlerForm);
   formAdd.addEventListener('submit', submitAddHandlerForm);
 
- 
+
