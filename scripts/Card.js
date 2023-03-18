@@ -37,12 +37,11 @@ export class Card {
     });
 
     this._buttonLike.addEventListener("click", () => {
-      this._putLike()
+      this._putLike();
     });
 
     this._elementImage.addEventListener("click", () => {
-      this._handleOpenPopup(this._name, this._link)
-    } )
-
+      this._handleOpenPopup(this._name, this._link);
+    });
   }
 }

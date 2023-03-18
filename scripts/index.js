@@ -21,27 +21,26 @@ const popupSubtitle = popupFullView.querySelector(".popup__subtitle");
 const nameInput = formEdit.querySelector(".popup__input_text_name");
 const jobInput = formEdit.querySelector(".popup__input_text_occupation");
 
-const popupCloseEdit = popupEdit.querySelector(".popup__close_edit");
-const popupCloseAdd = popupAdd.querySelector(".popup__close_add");
-const popupCloseFullView = popupFullView.querySelector(
-  ".popup__close_fullview"
-);
+// const popupCloseEdit = popupEdit.querySelector(".popup__close_edit");
+// const popupCloseAdd = popupAdd.querySelector(".popup__close_add");
+// const popupCloseFullView = popupFullView.querySelector(
+//   ".popup__close_fullview"
+// );
 
-const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".element");
+// const cardTemplate = document
+//   .querySelector("#card-template")
+//   .content.querySelector(".element");
 const elementsListElement = document.querySelector(".elements");
 const inputCardName = formAdd.querySelector("#card");
 const inputCardUrl = formAdd.querySelector("#url");
 const submitButton = formEdit.querySelector(".popup__submit");
 
 function createElement(item) {
-  const card = cardTemplate.cloneNode(true);
+  const card = new Card(item.name, item.link).generateCard();
+  elementsListElement.append(card);
   const cardText = card.querySelector(".element__name");
   const cardImage = card.querySelector(".element__photo");
-  // const cardElement = card.generateCard();
-  // elementsListElement.append(cardElement);
-
+ 
   cardImage.src = item.link;
   cardImage.alt = item.name;
   cardText.textContent = item.name;
@@ -49,6 +48,8 @@ function createElement(item) {
   card.querySelector(".element__delete").addEventListener("click", function () {
     card.remove();
   });
+
+  cardImage.addEventListener("click", handleOpenPopup);
 
   card
     .querySelector(".element__like")
@@ -66,7 +67,7 @@ const validationAddForm = new FormValidator(config, formAdd);
 validationAddForm.enableValidation();
 
 initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card-template");
+  const card = new Card(cardData, "#card-template", handleOpenPopup);
   const cardElement = card.generateCard();
   elementsListElement.append(cardElement);
 });
@@ -155,13 +156,15 @@ function handleOpenPopup(name, link) {
   cardImage.addEventListener("click", function (data) {
     popupPicture.src = cardImage.src;
 
-    popupPicture.alt = item.name;
+    popupPicture.alt = name;
 
-    popupSubtitle.textContent = item.name;
+    popupSubtitle.textContent = name;
 
     openPopup(popupFullView);
   });
 }
+
+
 
 popupEditOpenButton.addEventListener("click", openPopupEdit);
 popupAddOpenButton.addEventListener("click", openPopupAdd);
