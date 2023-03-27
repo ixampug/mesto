@@ -18,6 +18,10 @@ export class Card {
     this._buttonLike.classList.toggle("element__like_active");
   };
 
+  _deleteCard() {
+    this._element.remove();
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._elementName = this._element.querySelector(".element__name");
@@ -33,7 +37,7 @@ export class Card {
 
   _setEventListeners() {
     this._buttonDelete.addEventListener("click", () => {
-      this._element.remove();
+      this._deleteCard();
     });
 
     this._buttonLike.addEventListener("click", () => {

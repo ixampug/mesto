@@ -1,11 +1,12 @@
 import './index.css';
-import { initialCards, config } from "../components/data.js";
+import { initialCards, config } from "../utils/constants.js";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
 import { Section } from "../components/Section.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js"; 
+import { data } from 'autoprefixer';
 
 // const popupEdit = document.querySelector(".popup_edit");
 // const popupAdd = document.querySelector(".popup_add");
@@ -49,11 +50,8 @@ const handleCardClick = (name, link) => {
 };
 
 function handleEditOpenButtonClick() {
-  const userData = userInfo.getUserInfo()
-  nameInput.value = userData.name;
-  jobInput.value = userData.about;
-  validationEditForm.enableValidation();
-  
+  popupEdit.setInputValues(userInfo.getUserInfo());
+  validationEditForm.enableButton();
   popupEdit.open();
  }
 
@@ -62,17 +60,50 @@ function handleEditOpenButtonClick() {
   userInfo.setUserInfo(inputsValues);
  }
 
+// function createElement(item) {
+//   return new Card(item, "#card-template", handleCardClick).generateCard();
+// }
+
 function createElement(item) {
-  return new Card(item, "#card-template", handleCardClick).generateCard();
-}
+const card = new Card(item, "#card-template", handleCardClick);
+const cardElement = card.generateCard();
+return cardElement;
+};
 
 function renderCard(item) {
   const cardElement = createElement(item);
-  containerSelector.append(cardElement);
+  section.addItem(cardElement);
 }
 
+
+const section = new Section(
+  {
+  renderer: (item) => {
+    const cardElement = createElement(item);
+    section.addItem(cardElement);
+  }, containerSelector
+}
+);
+
+// const section = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//     const cardElement = createElement(item);
+//     section.addItem(cardElement);
+//   }
+// }, '.elements');
+
+// section.renderItem();
+
+
+
+// function renderCard(item) {
+//   const cardElement = createElement(item);
+//   containerSelector.append(cardElement);
+// }
+
 function handleAddOpenButtonClick() {
-  validationAddForm.enableValidation();
+  validationAddForm.disableButton();
   popupAdd.open();
 }
 
@@ -90,6 +121,18 @@ initialCards.forEach((cardData) => {
   containerSelector.append(cardElement);
 });
 
+// const cardsSection = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (cardData) => {
+//       const cardElement = createElement(cardData);
+//       return cardElement;
+//     },
+//   },
+//   '.elements'
+// );
+
+// cardsSection.renderItem();
 
 
 // const submitEditHandlerForm = (evt) => {
