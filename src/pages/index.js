@@ -33,15 +33,6 @@ const validationAddForm = new FormValidator(config, formAdd);
 validationAddForm.enableValidation();
 
 
-// const profileName = document.querySelector(".profile__name");
-// const profileOccupation = document.querySelector(".profile__occupation");
-
-
-// const popupFullView = document.querySelector(".popup_fullview");
-// const popupPicture = popupFullView.querySelector(".popup__picture");
-// const popupSubtitle = popupFullView.querySelector(".popup__subtitle");
-
-
 const popupWithImage = new PopupWithImage('.popup_fullview');
 popupWithImage.setEventListeners();
 
@@ -108,7 +99,7 @@ function handleAddOpenButtonClick() {
 }
 
 function submitAddHandlerForm(inputsValues) {
-  const {title: name, link} = inputsValues;
+  const {input_name: name, input_url: link} = inputsValues;
   renderCard({ name, link });
   popupAdd.close();
 }
@@ -135,19 +126,7 @@ initialCards.forEach((cardData) => {
 // cardsSection.renderItem();
 
 
-// const submitEditHandlerForm = (evt) => {
-//   evt.preventDefault();
-//   profileName.textContent = nameInput.value;
-//   profileOccupation.textContent = jobInput.value;
-//   closePopupEdit();
-// };
 
-// function submitAddHandlerForm(evt) {
-//   evt.preventDefault();
-//   const newCard = {
-//     name: inputCardName.value,
-//     link: inputCardUrl.value,
-//   };
 
 //   const element = createElement(newCard);
 //   containerSelector.prepend(element);
@@ -164,36 +143,10 @@ popupEdit.setEventListeners();
 
 const userInfo = new UserInfo({
   name: '.profile__name',
-  about: '.profile__occupation'
+  description: '.profile__occupation'
 });
 
 
-
-// popupEditOpenButton.addEventListener('click', () => {
-//   validationEditForm.enableButton();
-//   const userData = userInfo.getUserInfo()
-//   popupEdit.set
-
-// })
-
-
-// const openPopup = function (item) {
-//   item.classList.add("popup_opened");
-//   item.addEventListener("click", closePopupByClickOnOverlay);
-//   document.addEventListener("keyup", closePopupByKey);
-// };
-
-// const openPopupAdd = function () {
-//   openPopup(popupAdd);
-// };
-
-// const openPopupEdit = function () {
-//   const submitButton = formEdit.querySelector(".popup__submit");
-//   validationEditForm.enableButton();
-//   nameInput.value = profileName.textContent;
-//   jobInput.value = profileOccupation.textContent;
-//   openPopup(popupEdit);
-// };
 
 
 popupAddOpenButton.addEventListener('click', handleAddOpenButtonClick);

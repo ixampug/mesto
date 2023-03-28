@@ -33,37 +33,3 @@ export class Popup {
     });
   }
 }
-
-// const closePopupByKey = (e) => {
-//     if (e.key === "Escape") {
-//       const openedPopup = document.querySelector(".popup_opened");
-//       closePopup(openedPopup);
-//     }
-//   };
-
-//   const closePopupByClickOnOverlay = function (e) {
-//     if (e.target !== e.currentTarget) {
-//       return;
-//     }
-//     closePopup(e.currentTarget);
-//   };
-
-// const closePopup = function (item) {
-//   item.classList.remove("popup_opened");
-//   item.removeEventListener("click", closePopupByClickOnOverlay);
-//   document.removeEventListener("keyup", closePopupByKey);
-// };
-
-// const buttonCloseList = document.querySelectorAll(".popup__close");
-// buttonCloseList.forEach((btn) => {
-//   const popup = btn.closest(".popup");
-//   btn.addEventListener("click", () => closePopup(popup));
-// });
-
-// const closePopupEdit = function () {
-//   closePopup(popupEdit);
-// };
-
-// const closePopupAdd = function () {
-//   closePopup(popupAdd);
-// };
