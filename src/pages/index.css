@@ -48,6 +48,6 @@
 @import url(../blocks/popup/__close/popup__close.css);
 
 @import url(../blocks/popup/__fullscreen/popup__fullscreen.css);
-@import url(../blocks/popup/__fullview/popup__fullview.css);
+@import url(../blocks/popup/_fullview/popup_fullview.css);
 @import url(../blocks/popup/__picture/popup__picture.css);
 @import url(../blocks/popup/__subtitle/popup__subtitle.css);
