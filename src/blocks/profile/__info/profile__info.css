@@ -1,15 +1,16 @@
 .profile__info {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: grid;
+    grid-template: repeat(2, auto) / auto 24px;
+    row-gap: 16px;
+    align-content: center;
+    color: #FFFFFF;
     max-width: 336px;
-    padding-left: 30px;
-}
-
-@media screen and (max-width: 768px) {
+  }
+  
+  @media screen and (max-width: 424.98px) {
     .profile__info {
-        max-width: 282px;
-        padding: 24px 0 0;
-        
+      grid-template: repeat(2, auto) / auto 18px;
+      row-gap: 6px;
+      justify-content: center;
     }
-}
+  }
