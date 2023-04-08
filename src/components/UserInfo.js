@@ -13,7 +13,7 @@ export class UserInfo {
   //   return userData;
   // }
 
-  getUserInfo() {
+  getUserInformation() {
     const userData = {
       name: this._name,
       about: this._about,
