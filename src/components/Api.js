@@ -4,7 +4,7 @@ export class Api {
     this._authorization = authorization;
   }
 
-  _response(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -17,7 +17,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then(this._response);
+    }).then(this._checkResponse);
   } 
 
   getInitialCards() {
@@ -25,7 +25,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then(this._response);
+    }).then(this._checkResponse);
   }
 
   patchInfo({ name, about }) {
@@ -39,7 +39,7 @@ export class Api {
         name: name,
         about: about,
       }),
-    }).then(this._response);
+    }).then(this._checkResponse);
   }
 
   patchAvatar({ avatar }) {
@@ -52,7 +52,7 @@ export class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    }).then(this._response);
+    }).then(this._checkResponse);
   }
 
   
@@ -67,7 +67,7 @@ export class Api {
         name: name,
         link: link,
       }),
-    }).then(this._response);
+    }).then(this._checkResponse);
   }
 
   
@@ -83,7 +83,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then(this._response);
+    }).then(this._checkResponse);
   }
 
   deleteLike(cardId) {
@@ -92,7 +92,7 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then(this._response);
+    }).then(this._checkResponse);
   }
 
   
@@ -103,6 +103,6 @@ export class Api {
       headers: {
         authorization: this._authorization,
       },
-    }).then(this._response)
+    }).then(this._checkResponse)
   }
 }

@@ -1,23 +1,22 @@
 
 export class FormValidator {
-  constructor({
-    inputSelector,
-    submitButtonSelector,
-    inactiveButtonClass,
-    errorClass,
-    inputErrorClass,
-    formName
-  }) {
-    this._inputSelector = inputSelector;
-    this._submitButtonSelector = submitButtonSelector;
-    this._inactiveButtonClass = inactiveButtonClass;
-    this._errorClass = errorClass;
-    this._inputErrorClass = inputErrorClass;
+  constructor(config, formName) {
+    this._inputSelector = config.inputSelector;
+    this._buttonSubmitSelector = config.buttonSubmitSelector;
+    this._buttonSubmitDisabledClass = config.buttonSubmitDisabledClass;
+    this._inputErrorActiveClass = config.inputErrorActiveClass;
+    this._inputTypeErrorClass = config.inputTypeErrorClass;
+    this._errorClass = config.errorClass;
+    this._inputErrorClass = config.inputErrorClass;
     this._form = document.forms[formName];
     this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._submitButton = this._form.querySelector(this._buttonSubmitSelector);
   }
-
+  
+  enableValidation() {
+    this._setEventListeners();
+  }
+  
   _showInputError(inputElement) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     errorElement.textContent = inputElement.validationMessage;
@@ -58,6 +57,14 @@ export class FormValidator {
     }
   }
 
+  resetValidation() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+    this.disableButton();
+  }
+
+
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -67,21 +74,12 @@ export class FormValidator {
     });
   }
 
-  resetValidation() {
-    this._inputList.forEach((inputElement) => {
-      this._hideInputError(inputElement);
-    });
-    this.disableButton();
-  }
-
+ 
   _isFormValid() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  enableValidation() {
-    this._setEventListeners();
-    
-  }
+  
 }
