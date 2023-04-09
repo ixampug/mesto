@@ -1,34 +1,35 @@
 import "./index.css";
-import {apiSettings,config} from "../utils/constants.js";
-import {Api} from "../components/Api";
-import {Card} from "../components/Card.js";
-import {FormValidator} from "../components/FormValidator.js";
-import {Section} from "../components/Section.js";
-import {PopupWithForm} from "../components/PopupWithForm.js";
-import {PopupWithImage} from "../components/PopupWithImage.js";
-import {UserInfo} from "../components/UserInfo.js";
-import {PopupConfirm} from "../components/PopupConfirm";
+import { apiSettings, config } from "../utils/constants.js";
+import Api from "../components/Api";
+import { Section } from "../components/Section.js";
+import Card from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
 
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { PopupConfirm } from "../components/PopupConfirm";
 
 // const popupEdit = document.querySelector(".popup_edit");
 // const popupAdd = document.querySelector(".popup_add");
 
-const popupEditOpenButton = document.querySelector('.profile__edit');
-const popupAddOpenButton = document.querySelector('.profile__add');
-const popupAvatarOpenButton = document.querySelector('.profile__change-photo');
-
+const popupEditOpenButton = document.querySelector(".profile__edit");
+const popupAddOpenButton = document.querySelector(".profile__add");
+const popupAvatarOpenButton = document.querySelector(".profile__change-photo");
 
 function getCardElement(item) {
-  const isLikedByOwner = item.likes.some((like) => like._id === userInfo.getUserId());
+  const isLikedByOwner = item.likes.some(
+    (like) => like._id === userInfo.getUserId()
+  );
   const ownerCard = item.owner._id === userInfo.getUserId();
+  const templateSelector = '#card-template';
   const card = new Card(
     item,
     isLikedByOwner,
     ownerCard,
     "#card-template",
+    handleLikeCard,
     handleCardClick,
-    handleLike,
-    
     handleDelete
   );
   const cardElement = card.createCard();
@@ -40,13 +41,10 @@ function renderCard(item) {
   section.addItem(cardElement);
 }
 
-
 function handleAddOpenButtonClick() {
   addFormValidator.resetValidation();
   popupAddCard.open();
 }
-
-
 
 function handleEditOpenButtonClick() {
   popupEditProfile.setInputValues(userInfo.getUserInformation());
@@ -55,16 +53,18 @@ function handleEditOpenButtonClick() {
 }
 
 function submitEditHandlerForm(inputsValues) {
-  return api.patchInfo(inputsValues)
-    .then((user) => {
-      userInfo.setUserInfo(user);
-      userInfo.renderUserInfo();
-    })
+  return api.patchInfo(inputsValues).then((user) => {
+    userInfo.setUserInfo(user);
+    userInfo.renderUserInfo();
+  });
 }
 
+function handleCardClick(name, title) {
+  popupWithImage.open(name, title);
+}
 
-function handleLike(cardId, card) {
-  if (!card.isLikedByOwner) {
+function handleLikeCard(cardId, card) {
+  if (!card.isCardLikeOwner) {
     api.putLike(cardId)
       .then(({ likes }) => {
         card.updateLikes(likes.length);
@@ -85,14 +85,14 @@ function handleDelete(cardId, card) {
 
 function submitAddHandlerForm(inputsValues) {
   const { title: name, link } = inputsValues;
-  return api.postCard(name, link)
-    .then((item) => {
-      renderCard(item);
-    });
+  return api.postCard(name, link).then((item) => {
+    renderCard(item);
+  });
 }
 
 function handleConfirmation({ cardId, card }) {
-  api.deleteCard(cardId)
+  api
+    .deleteCard(cardId)
     .then(() => {
       card.deleteCard();
       popupConfirm.close();
@@ -106,13 +106,11 @@ function handleUpdateAvatar() {
 }
 
 function submitAvatarHandlerForm(inputsValues) {
-  return api.patchAvatar(inputsValues)
-    .then((user) => {
-      userInfo.setUserInfo(user);
-      userInfo.renderUserAvatar();
-    });
+  return api.patchAvatar(inputsValues).then((user) => {
+    userInfo.setUserInfo(user);
+    userInfo.renderUserAvatar();
+  });
 }
-
 
 const api = new Api(apiSettings);
 
@@ -129,12 +127,17 @@ Promise.all([api.getUserInformation(), api.getInitialCards()])
     userInfo.setUserInfo(userData);
     userInfo.renderUserInfo();
     userInfo.renderUserAvatar();
-    section.renderItem(initialCards.reverse())
+    section.renderItem(initialCards.reverse());
   })
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
-const popupEditProfile = new PopupWithForm("#popup-edit", submitEditHandlerForm);
+const popupEditProfile = new PopupWithForm(
+  "#popup-edit",
+  submitEditHandlerForm
+);
 popupEditProfile.setEventListeners();
+const editFormValidator = new FormValidator(config, "formEdit");
+editFormValidator.enableValidation();
 
 
 const popupAddCard = new PopupWithForm("#popup-add", submitAddHandlerForm);
@@ -143,38 +146,29 @@ const addFormValidator = new FormValidator(config, "popupAddForm");
 addFormValidator.enableValidation();
 
 
-const editFormValidator = new FormValidator(
-  config,
-  "formEdit"
-);
-editFormValidator.enableValidation();
-
-
 
 const popupConfirm = new PopupConfirm("#popup-confirm", handleConfirmation);
 popupConfirm.setEventListeners();
 
-const popupWithImage = new PopupWithImage( '.popup_fullview',
-  "#popup-open-image",
-  ".popup__picture",
-  ".popup__subtitle"
-);
-popupWithImage.setEventListeners();
 
-const handleCardClick = (name, link) => {
-  popupWithImage.open(name, link);
-};
 
 const popupUpdateAvatar = new PopupWithForm(
   "#popup-update-avatar",
   submitAvatarHandlerForm
 );
 popupUpdateAvatar.setEventListeners();
-const avatarFormValidator = new FormValidator(
-  config,
-  "popupUpdateAvatarForm"
-);
+const avatarFormValidator = new FormValidator(config, "popupUpdateAvatarForm");
 avatarFormValidator.enableValidation();
+
+
+const popupWithImage = new PopupWithImage(
+  ".popup_fullview",
+  "#popup-open-image",
+  ".popup__picture",
+  ".popup__subtitle"
+);
+popupWithImage.setEventListeners();
+
 
 popupEditOpenButton.addEventListener("click", handleEditOpenButtonClick);
 popupAddOpenButton.addEventListener("click", handleAddOpenButtonClick);

@@ -1,4 +1,4 @@
-export class Api {
+export default class Api {
   constructor({ baseUrl, authorization }) {
     this._baseUrl = baseUrl;
     this._authorization = authorization;
@@ -70,6 +70,15 @@ export class Api {
     }).then(this._checkResponse);
   }
 
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this._authorization,
+      },
+    }).then(this._checkResponse)
+  }
   
 
  
@@ -95,14 +104,4 @@ export class Api {
     }).then(this._checkResponse);
   }
 
-  
-
-  deleteCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/${cardId}`, {
-      method: "DELETE",
-      headers: {
-        authorization: this._authorization,
-      },
-    }).then(this._checkResponse)
-  }
 }
