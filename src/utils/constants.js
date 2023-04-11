@@ -38,7 +38,11 @@
 
   const apiSettings = {
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-62',
-    authorization: 'cd983aab-0173-48f8-ad97-5923b000f4c3',
+    
+    headers: {
+      authorization: 'cd983aab-0173-48f8-ad97-5923b000f4c3',
+      "Content-Type": "application/json",
+    }
   }
 
   export {apiSettings, config}

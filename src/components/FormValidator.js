@@ -3,9 +3,10 @@ export class FormValidator {
   constructor(config, formName) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
-    this._inactiveButtonClass = config.inactiveButtonClass;
+    // this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
     this._errorClass = config.errorClass;
     this._inputErrorClass = config.inputErrorClass;
+    this._inactiveButtonClass = config.inactiveButtonClass;
     this._form = document.forms[formName];
   }
 
@@ -51,7 +52,7 @@ export class FormValidator {
 
   _enableButton() {
     const buttonSubmit = this._form.querySelector(this._submitButtonSelector);
-    buttonSubmit.classList.remove(this._inactiveButtonClass);
+    buttonSubmit.remove(this._inactiveButtonClass);
     buttonSubmit.disabled = false;
   }
 
