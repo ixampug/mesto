@@ -3,11 +3,11 @@ export class FormValidator {
   constructor(config, formName) {
     this._inputSelector = config.inputSelector;
     this._submitButtonSelector = config.submitButtonSelector;
-    // this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
     this._errorClass = config.errorClass;
     this._inputErrorClass = config.inputErrorClass;
     this._inactiveButtonClass = config.inactiveButtonClass;
     this._form = document.forms[formName];
+    this._buttonSubmit = this._form.querySelector(this._submitButtonSelector);
   }
 
  
@@ -45,15 +45,13 @@ export class FormValidator {
   }
 
   _disableButton() {
-    const buttonSubmit = this._form.querySelector(this._submitButtonSelector);
-    buttonSubmit.classList.add(this._inactiveButtonClass);
-    buttonSubmit.disabled = true;
+    this._buttonSubmit.classList.add(this._inactiveButtonClass);
+    this._buttonSubmit.disabled = true;
   }
 
   _enableButton() {
-    const buttonSubmit = this._form.querySelector(this._submitButtonSelector);
-    buttonSubmit.remove(this._inactiveButtonClass);
-    buttonSubmit.disabled = false;
+    this._buttonSubmit.remove(this._inactiveButtonClass);
+    this._buttonSubmit.disabled = false;
   }
 
   _checkInputValidity(inputElement) {
